@@ -1,5 +1,6 @@
 package com.neelkanth.medicals.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -24,17 +25,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicineRecords {
+public class MedicineRecords implements Serializable{
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String medicineName;
 	private String manufuactureDate;
 	private String expiryDate;
 	private boolean isGeneric;
 	private boolean prescribedByDoctor;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "doctorInfo_id")
 	private DoctorInfo doctor;
 	private String[] usedForIssue;
