@@ -1,15 +1,26 @@
 package com.neelkanth.medicals.model;
 
+import java.util.Arrays;
+import java.util.Objects;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "medicine_records")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +34,9 @@ public class MedicineRecords {
 	private String expiryDate;
 	private boolean isGeneric;
 	private boolean prescribedByDoctor;
+	@ManyToOne
+	@JoinColumn(name = "doctorInfo_id")
+	private DoctorInfo doctor;
 	private String[] usedForIssue;
 	private int sachetsBought;
 	private int numbersBought;
@@ -45,7 +59,6 @@ public class MedicineRecords {
 	private String col10;
 	private String col11;
 	private String col12;
-	
 }
 
 enum MedicineType{
